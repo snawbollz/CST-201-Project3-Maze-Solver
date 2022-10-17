@@ -128,7 +128,6 @@ void depthFirst(MazeCell start, MazeCell end)	//O(V + E)
 			cells[row][col].visit();
 			col++;
 
-
 		} // Down
 		else if (cells[row + 1][col].unVisited() == true && cells[row + 1][col].getRow() != -1 && (row + 1) < 4) {
 			myStack.push(cells[row][col]);
@@ -150,7 +149,6 @@ void depthFirst(MazeCell start, MazeCell end)	//O(V + E)
 			myStack.push(cells[row][col]);
 			cells[row][col].visit();
 			row--;
-
 
 		}
 	}
