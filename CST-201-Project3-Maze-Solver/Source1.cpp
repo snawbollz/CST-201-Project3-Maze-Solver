@@ -1,4 +1,4 @@
-//Source for MazeSolver
+/ Source for MazeSolver
 
 #include <iostream>
 #include <fstream>
@@ -105,6 +105,7 @@ int main() {
 	//solve it!
 	depthFirst(start, end);
 
+
 	return 0;
 }
 
@@ -121,28 +122,26 @@ void depthFirst(MazeCell start, MazeCell end)	//O(V + E)
 	myStack.push(cells[row][col]);
 
 	while (cells[row][col] != cells[end.getRow()][end.getCol()]) {
-
+		// Left
+		if (cells[row][col - 1].unVisited() == true && cells[row][col - 1].getCol() != -1 && (col - 1) < 6) {
+		myStack.push(cells[row][col]);
+		cells[row][col].visit();
+		col--;
+		cout << myStack.top() << endl;
+		}
 		// Right
-		if (cells[row][col + 1].unVisited() == true && cells[row][col + 1].getCol() != -1 && (col + 1) < 6) {
+		else if (cells[row][col + 1].unVisited() == true && cells[row][col + 1].getCol() != -1 && (col + 1) < 6) {
 			myStack.push(cells[row][col]);
 			cells[row][col].visit();
 			col++;
-
+			cout << myStack.top() << endl;
 
 		} // Down
 		else if (cells[row + 1][col].unVisited() == true && cells[row + 1][col].getRow() != -1 && (row + 1) < 4) {
 			myStack.push(cells[row][col]);
 			cells[row][col].visit();
 			row++;
-
-
-
-		}// Left
-		else if (cells[row][col - 1].unVisited() == true && cells[row][col - 1].getCol() != -1 && (col - 1) < 6) {
-			myStack.push(cells[row][col]);
-			cells[row][col].visit();
-			col--;
-
+			cout << myStack.top() << endl;
 
 
 		} // Up
@@ -150,19 +149,14 @@ void depthFirst(MazeCell start, MazeCell end)	//O(V + E)
 			myStack.push(cells[row][col]);
 			cells[row][col].visit();
 			row--;
-
-
+			cout << myStack.top() << endl;
 		}
+
 	}
 	if (cells[row][col] == cells[end.getRow()][end.getCol()]) {
 		myStack.push(cells[row][col]);
-		cout << "Exit Found!" <<endl;
-
-		cout << "Path: " << endl;
-		while (myStack.empty() != true) {
-			cout << myStack.top() << endl;
-			myStack.pop();
-		}
+		cout << myStack.top() << endl;
+		cout << "Exit Found!";
 	}
 	else {
 		cout << "stuck" << endl;
