@@ -116,36 +116,48 @@ int main() {
 
 void depthFirst(MazeCell start, MazeCell end)	//O(V + E)
 {
-	int i = start.getRow();
-	int j = start.getCol();
+	int row = start.getRow();
+	int col = start.getCol();
 	MyStack<MazeCell>myStack;
-	myStack.push(cells[i][j]);
+	myStack.push(cells[row][col]);
 
-	while (cells[i][j] != cells[end.getRow()][end.getCol()]) {
+	while (cells[row][col] != cells[end.getRow()][end.getCol()]) {
 		// Right
-		if (cells[i][j + 1].unVisited()==true && cells[i][j].getRow() != -1 && (i+ 1) < 6) {
-			myStack.push(cells[i][j]);
-			cells[i][j].visit();
-			j++;
-			cout<<myStack.top();
+		if (cells[row][col + 1].unVisited() == true && cells[row][col + 1].getCol() != -1 && (col + 1) < 6) {
+			myStack.push(cells[row][col]);
+			cells[row][col].visit();
+			col++;
+			cout << myStack.top() << endl;
+
 		} // Down
-		else if (cells[i + 1][j].unVisited()==true && (j + 1) < 5 && cells[i][j].getCol() != -1) {
-			myStack.push(cells[i][j]);
-			cells[i][j].visit();
-			i++;
-			cout<<myStack.top();
-		}/* // Left
-		else if (cells[r][c - 1].unVisited()==true && cells[r][c].getRow() != -1 && r+1 < 6) {
-			myStack.push(cells[r][c]);
-			cells[r][c].visit();
-			r--;
-			cout<<myStack.top();
-		}// Up
-		else if(cells[r][c - 1].unVisited()==true && cells[r][c].getRow() != -1 && c+1 < 6) {
-			myStack.push(cells[r][c]);
-			cells[r][c].visit();
-			c--;
-			cout<<myStack.top();
-		}*/
+		else if (cells[row + 1][col].unVisited() == true && cells[row + 1][col].getRow() != -1 && (row + 1) < 4) {
+			myStack.push(cells[row][col]);
+			cells[row][col].visit();
+			row++;
+			cout << myStack.top() << endl;
+
+		}// Left
+		else if (cells[row][col - 1].unVisited() == true && cells[row][col - 1].getCol() != -1 && (col - 1) < 6) {
+			myStack.push(cells[row][col]);
+			cells[row][col].visit();
+			col--;
+			cout << myStack.top() << endl;
+
+		} // Up
+		else if(cells[row - 1][col].unVisited() == true && cells[row - 1][col].getRow() != -1 && (row + 1) < 4) {
+			myStack.push(cells[row][col]);
+			cells[row][col].visit();
+			row--;
+			cout << myStack.top() << endl;
+		}
+		
+	}
+	if (cells[row][col] == cells[end.getRow()][end.getCol()]) {
+		myStack.push(cells[row][col]);
+		cout << myStack.top() << endl;
+		cout << "Exit Found!";
+	}
+	else {
+		cout << "stuck" << endl;
 	}
 }
