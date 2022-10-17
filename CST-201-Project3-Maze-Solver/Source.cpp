@@ -166,5 +166,8 @@ void depthFirst(MazeCell start, MazeCell end)	//O(V + E)
 	}
 	else {
 		cout << "stuck" << endl;
+		while (myStack.top() != cells[start.getRow()][start.getCol()]) {
+			myStack.pop();
+		}
 	}
 }
